@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <stdbool.h>
 
 #include "core.h"
 #include "appstate.h"
@@ -54,9 +55,6 @@ bool AppInit(struct AppState *as) {
 
 bool AppUpdate(struct AppState *as) {
 	printf("main loop\n");
-	switch (as->state) {
-	
-	}
 
 	return true;
 }

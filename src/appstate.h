@@ -1,4 +1,10 @@
+#pragma once
+
+#include <stdbool.h>
+
 #include "states.h"
+
+
 
 struct AppState {
 	int Input;
@@ -7,9 +13,9 @@ struct AppState {
 	char *InputDir;
 	char *OutputDir;
 
-	enum State state;
+	struct State *CurrState;
+	struct StateDict *States;
 };
-
 
 bool AppStateInit(struct AppState *as);
 bool AppStateDeinit(struct AppState *as);
