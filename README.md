@@ -1,2 +1,2 @@
 # ucs-sample-organizer
-na ucs file renamer and organizer
+Just an ucs sample renamer and organizer.
