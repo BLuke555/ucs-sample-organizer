@@ -2,6 +2,7 @@
 #include <stdlib.h>
 
 #include "appstate.h"
+#include "states.h"
 
 
 bool AppStateInit(struct AppState *as) {
@@ -11,7 +12,7 @@ bool AppStateInit(struct AppState *as) {
 	as->InputDir = NULL;
 	as->OutputDir = NULL;
 
-	StateInit(as->CurrState);
+	StateInit(&as->CurrState, STATE_COMMAND, as->States);
 	return true;
 }
 

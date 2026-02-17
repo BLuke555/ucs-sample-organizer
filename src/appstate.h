@@ -5,9 +5,8 @@
 #include "states.h"
 
 
-
 struct AppState {
-	int Input;
+	char Input;
 
 	char *CsvDir;
 	char *InputDir;

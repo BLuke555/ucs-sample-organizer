@@ -29,7 +29,7 @@ int main() {
 
 	// main loop
 	// in which all the calculation si done
-	int i = 0;
+	i8 i = 0;
 	while (i < 10) {
 		GetInput();
 		if (!AppUpdate(appstate)) {
