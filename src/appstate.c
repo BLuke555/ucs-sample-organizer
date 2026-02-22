@@ -12,6 +12,7 @@ bool AppStateInit(struct AppState *as) {
 	as->InputDir = NULL;
 	as->OutputDir = NULL;
 
+	StateDictInit(&as->States);
 	StateInit(&as->CurrState, STATE_COMMAND, as->States);
 	return true;
 }

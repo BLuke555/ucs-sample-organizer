@@ -1,7 +1,7 @@
 #pragma  once
 
-#include "../states.h"
+struct AppState;
 
-void CommandEnter();
-void CommandUpdate();
-void CommandExit();
+void CommandEnter(struct AppState *as);
+void CommandUpdate(struct AppState *as);
+void CommandExit(struct AppState *as);

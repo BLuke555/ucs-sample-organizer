@@ -45,7 +45,6 @@ int main() {
 }
 
 
-
 bool AppInit(struct AppState *as) {
 	printf("intialize\n");
 	AppStateInit(as);
@@ -55,6 +54,7 @@ bool AppInit(struct AppState *as) {
 
 bool AppUpdate(struct AppState *as) {
 	printf("main loop\n");
+	as->CurrState->update(as);
 
 	return true;
 }
