@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-#include "core.h"
-#include "appstate.h"
+#include "core/core.h"
+#include "core/appstate.h"
 
 
 bool AppInit(struct AppState *as);
@@ -11,7 +11,6 @@ bool AppUpdate(struct AppState *as);
 void AppDeinit(struct AppState **as);
 
 void GetInput();
-
 
 
 int main() {

@@ -2,7 +2,7 @@
 
 #include <stdbool.h>
 
-#include "states.h"
+#include "../states/states.h"
 
 
 struct AppState {

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 
 #include "appstate.h"
-#include "states.h"
+#include "../states/states.h"
 
 
 bool AppStateInit(struct AppState *as) {
@@ -14,6 +14,8 @@ bool AppStateInit(struct AppState *as) {
 
 	StateDictInit(&as->States);
 	StateInit(&as->CurrState, STATE_COMMAND, as->States);
+	as->CurrState->enter(as);
+
 	return true;
 }
 

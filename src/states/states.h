@@ -3,9 +3,9 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-#include "core.h"
-#include "states/normal.h"
-#include "states/command.h"
+#include "../core/core.h"
+#include "normal.h"
+#include "command.h"
 
 #define MAX_STATES 5
 
