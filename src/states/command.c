@@ -15,32 +15,31 @@ void CommandEnter(struct AppState *as) {
 	scanf("%[^\n]", command);
 }
 
-
 bool CommandUpdate(struct AppState *as) {
-	SwitchState(as, STATE_NORMAL);
-
-	return true;
+	return SwitchState(as, STATE_NORMAL);
 }
 
-
 void CommandExit(struct AppState *as) {
-	u8 i = 0;
 	char *token = strtok(command, " ");
 
+	if (!token) {return;}
+
+	u8 i = 0;
 	while (token) {
 		args[i].size = strlen(token);
-		args[i].str = (char*) malloc((args[i].size + 1) * sizeof(char));
-		strncpy(args[i].str, token, args[i].size);
+		args[i].str = (char*) malloc((args[i].size) * sizeof(char));
+		strncpy(args[i].str, token, args[i].size + 1);
 
 		token = strtok(NULL, " ");
 		i++;
 	}
 
-	printf("%s\n", args[0].str);
-	if (strcmp(args[0].str, "move") == 0) {
-		printf("daje");
+	if (strcmp(args[0].str, "move") == 0 || strcmp(args[0].str, "mv") == 0) {
 		move(args);
 	}
 
-	printf("done\n");
+	for (u8 j = 0; j < 4; j++) {
+		free(args[j].str);
+		args[j].str = NULL;
+	}
 }

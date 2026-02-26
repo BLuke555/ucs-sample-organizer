@@ -4,5 +4,5 @@
 
 
 void move(string8 args[4]) {
-	printf("moving shit at %s", args[1].str);
+	printf("moving shit at %s\n", args[1].str);
 }
