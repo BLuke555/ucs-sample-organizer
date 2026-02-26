@@ -14,7 +14,8 @@ void GetInput();
 
 
 int main() {
-	struct AppState *appstate = malloc(sizeof(struct AppState));
+	struct AppState *appstate =(struct AppState*) malloc(sizeof(struct AppState));
+	printf("%lu\n", sizeof(struct AppState));
 	bool running;
 
 	if (!AppInit(&appstate)) {

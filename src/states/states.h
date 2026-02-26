@@ -33,5 +33,3 @@ bool StateDictInit(struct StateDict **Dictionary);
 bool StateInit(struct State **CurrentState, enum StateType InitialState, struct StateDict *States);
 bool SwitchState(struct AppState *as, enum StateType to);
 
-void SetStateDict(struct StateDict *dict, enum StateType key, struct State *value);
-struct State *GetStateValue(struct StateDict *dict, enum StateType key);

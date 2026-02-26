@@ -6,13 +6,11 @@
 #include "../commands/command-funcs.h"
 
 char command[1024];
-string8 args[4];
-
 
 
 void CommandEnter(struct AppState *as) {
 	printf("Insert the command: \n");
-	scanf("%[^\n]", command);
+	scanf("%1023[^\n]", command);
 }
 
 bool CommandUpdate(struct AppState *as) {
@@ -20,14 +18,18 @@ bool CommandUpdate(struct AppState *as) {
 }
 
 void CommandExit(struct AppState *as) {
-	char *token = strtok(command, " ");
+	string8 args[4];
+	for (u8 j = 0; j < 4; j++) {
+		args[j].str = NULL;
+	}
 
+	char *token = strtok(command, " ");
 	if (!token) {return;}
 
 	u8 i = 0;
 	while (token) {
 		args[i].size = strlen(token);
-		args[i].str = (char*) malloc((args[i].size) * sizeof(char));
+		args[i].str = (char*) malloc((args[i].size + 1) * sizeof(char));
 		strncpy(args[i].str, token, args[i].size + 1);
 
 		token = strtok(NULL, " ");
@@ -39,7 +41,9 @@ void CommandExit(struct AppState *as) {
 	}
 
 	for (u8 j = 0; j < 4; j++) {
-		free(args[j].str);
-		args[j].str = NULL;
+		if (args[j].str) {
+			free(args[j].str);
+			args[j].str = NULL;
+		}
 	}
 }
