@@ -13,7 +13,7 @@ struct AppState;
 
 struct State {
 	void (*enter)(struct AppState*);
-	void (*update)(struct AppState*);
+	bool (*update)(struct AppState*);
 	void (*exit)(struct AppState*);
 };
 

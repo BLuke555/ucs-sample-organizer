@@ -6,7 +6,7 @@
 #include "core/appstate.h"
 
 
-bool AppInit(struct AppState *as);
+bool AppInit(struct AppState **as);
 bool AppUpdate(struct AppState *as);
 void AppDeinit(struct AppState **as);
 
@@ -15,51 +15,35 @@ void GetInput();
 
 int main() {
 	struct AppState *appstate = malloc(sizeof(struct AppState));
+	bool running;
 
-	if (!appstate) {
-		printf("couldn't initialize memory for the appstate.\n");
+	if (!AppInit(&appstate)) {
 		return -1;
 	}
 
-	// initialize all the memory and the graphics
-	if (!AppInit(appstate)) {
-		return -1;
-	}
-
-	// main loop
-	// in which all the calculation si done
-	i8 i = 0;
-	while (i < 10) {
+	do {
 		GetInput();
-		if (!AppUpdate(appstate)) {
-			break;		
-		}
-		i++;
-	}
+		running = AppUpdate(appstate);
+	} while (running);
 
-	// deinitialize all the memory and the grapic before colsing it
 	AppDeinit(&appstate);
 
 	return 0;
 }
 
 
-bool AppInit(struct AppState *as) {
-	printf("intialize\n");
-	AppStateInit(as);
+bool AppInit(struct AppState **as) {
+	(*as) = (struct AppState*) malloc(sizeof(struct AppState));
+	AppStateInit(*as);
 
 	return true;
 }
 
 bool AppUpdate(struct AppState *as) {
-	printf("main loop\n");
-	as->CurrState->update(as);
-
-	return true;
+	return as->CurrState->update(as);
 }
 
 void AppDeinit(struct AppState **as) {
-	printf("deinitializing memory dedicated to appstate\n");
 	AppStateDeinit(*as);
 	free(*as);
 	(*as) = NULL;

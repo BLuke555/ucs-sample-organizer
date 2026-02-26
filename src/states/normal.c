@@ -6,8 +6,9 @@ void NormalEnter(struct AppState *as) {
 	exit(-1);
 }
 
-void NormalUpdate(struct AppState *as) {
+bool NormalUpdate(struct AppState *as) {
 
+	return false;
 }
 
 void NormalExit(struct AppState *as) {
