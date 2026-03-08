@@ -5,12 +5,12 @@
 #include "states.h"
 #include "../commands/command-funcs.h"
 
-char command[1024];
+char command[256];
 
 
 void CommandEnter(struct AppState *as) {
 	printf("Insert the command: \n");
-	scanf("%1023[^\n]", command);
+	scanf("%255[^\n]", command);
 }
 
 bool CommandUpdate(struct AppState *as) {

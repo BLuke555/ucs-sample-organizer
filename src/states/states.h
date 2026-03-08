@@ -30,6 +30,7 @@ struct StateDict {
 
 
 bool StateDictInit(struct StateDict **Dictionary);
+void StateDictDeinit(struct StateDict **Dictionary);
 bool StateInit(struct State **CurrentState, enum StateType InitialState, struct StateDict *States);
 bool SwitchState(struct AppState *as, enum StateType to);
 

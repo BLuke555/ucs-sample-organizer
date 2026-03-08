@@ -5,16 +5,25 @@
 #include "../states/states.h"
 
 
-bool AppStateInit(struct AppState *as) {
-	as->Input = 0;
+bool AppStateInit(struct AppState **as) {
+	(*as) = (struct AppState*) malloc(sizeof(struct AppState));
+	if (!*as) {
+		printf("Couldn't allocate memory for the appstate");
+		return false;
+	}
 
-	as->CsvDir = NULL;
-	as->InputDir = NULL;
-	as->OutputDir = NULL;
+	(*as)->Input = 0;
 
-	StateDictInit(&as->States);
-	StateInit(&as->CurrState, STATE_COMMAND, as->States);
-	as->CurrState->enter(as);
+	(*as)->CsvDir.size = 0;
+	(*as)->CsvDir.str = NULL;
+	(*as)->InputDir.size = 0;
+	(*as)->InputDir.str = NULL;
+	(*as)->OutputDir.size = 0;
+	(*as)->OutputDir.str = NULL;
+
+	StateDictInit(&(*as)->States);
+	StateInit(&(*as)->CurrState, STATE_COMMAND, (*as)->States);
+	(*as)->CurrState->enter(*as);
 
 	return true;
 }
@@ -22,29 +31,22 @@ bool AppStateInit(struct AppState *as) {
 bool AppStateDeinit(struct AppState *as) {
 	as->Input = 0;
 
-	if (as->CsvDir) {
-		free(as->CsvDir);
-		as->CsvDir = NULL;
+	if (as->CsvDir.str) {
+		as->CsvDir.size = 0;
+		free(as->CsvDir.str);
+		as->CsvDir.str = NULL;
 	}
-	if (as->InputDir) {
-		free(as->InputDir);
-		as->InputDir = NULL;
+	if (as->InputDir.str) {
+		as->InputDir.size = 0;
+		free(as->InputDir.str);
+		as->InputDir.str = NULL;
 	}
-	if (as->OutputDir) {
-		free(as->OutputDir);
-		as->OutputDir = NULL;
+	if (as->OutputDir.str) {
+		as->OutputDir.size = 0;
+		free(as->OutputDir.str);
+		as->OutputDir.str = NULL;
 	}
-
-	if (as->States) {
-		for (u8 i = 0; i < as->States->size; i++) {
-			if (as->States->value[i]) {
-				free(as->States->value[i]);
-				as->States->value[i] = NULL;
-			}
-		}
-		free(as->States);
-		as->States = NULL;
-	}
+	StateDictDeinit(&as->States);
 
 	return true;
 }

@@ -8,13 +8,13 @@
 struct AppState {
 	char Input;
 
-	char *CsvDir;
-	char *InputDir;
-	char *OutputDir;
+	string8 CsvDir;
+	string8 InputDir;
+	string8 OutputDir;
 
 	struct State *CurrState;
 	struct StateDict *States;
 };
 
-bool AppStateInit(struct AppState *as);
+bool AppStateInit(struct AppState **as);
 bool AppStateDeinit(struct AppState *as);

@@ -7,25 +7,19 @@
 
 
 bool AppInit(struct AppState **as);
+void GetInput(struct AppState *as);
 bool AppUpdate(struct AppState *as);
 void AppDeinit(struct AppState **as);
 
-void GetInput();
-
 
 int main() {
-	struct AppState *appstate =(struct AppState*) malloc(sizeof(struct AppState));
-	printf("%lu\n", sizeof(struct AppState));
-	bool running;
+	struct AppState *appstate;
 
-	if (!AppInit(&appstate)) {
-		return -1;
-	}
+	if (!AppInit(&appstate)) return -1;
 
 	do {
-		GetInput();
-		running = AppUpdate(appstate);
-	} while (running);
+		GetInput(appstate);
+	} while (AppUpdate(appstate));
 
 	AppDeinit(&appstate);
 
@@ -33,11 +27,12 @@ int main() {
 }
 
 
-bool AppInit(struct AppState **as) {
-	(*as) = (struct AppState*) malloc(sizeof(struct AppState));
-	AppStateInit(*as);
 
-	return true;
+bool AppInit(struct AppState **as) {
+	return AppStateInit(as);
+}
+
+void GetInput(struct AppState *as) {
 }
 
 bool AppUpdate(struct AppState *as) {
@@ -48,11 +43,4 @@ void AppDeinit(struct AppState **as) {
 	AppStateDeinit(*as);
 	free(*as);
 	(*as) = NULL;
-
-	printf("memory deinitialized correctly\n");
-}
-
-
-void GetInput() {
-	printf("getting input\n");
 }

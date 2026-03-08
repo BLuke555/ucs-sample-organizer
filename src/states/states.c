@@ -24,7 +24,6 @@ bool StateDictInit(struct StateDict **Dictionary) {
 	(*Dictionary)->value[0]->update = &NormalUpdate;
 	(*Dictionary)->value[0]->exit = &NormalExit;
 
-
 	// COMMAND MODE
 	(*Dictionary)->key[1] = STATE_COMMAND;
 	(*Dictionary)->value[1] = (struct State*) malloc(sizeof(struct State));
@@ -38,7 +37,7 @@ bool StateDictInit(struct StateDict **Dictionary) {
 
 
 bool StateInit(struct State **CurrentState, enum StateType InitialState, struct StateDict *States) {
-	for(i8 i = 0; i < States->size; i++) {
+	for(u8 i = 0; i < States->size; i++) {
 		if (States->key[i] == InitialState) {
 			*CurrentState = States->value[i];
 		}
@@ -53,6 +52,23 @@ bool StateInit(struct State **CurrentState, enum StateType InitialState, struct 
 }
 
 
+void StateDictDeinit(struct StateDict **Dictionary) {
+	if (*Dictionary) {
+		for (u8 i = 0; i < (*Dictionary)->size; i++) {
+			if ((*Dictionary)->value[i]) {
+				free((*Dictionary)->value[i]);
+				(*Dictionary)->value[i] = NULL;
+			}
+		}
+
+		(*Dictionary)->size = 0;
+
+		free(*Dictionary);
+		*Dictionary = NULL;
+	}
+}
+
+
 bool SwitchState(struct AppState *as, enum StateType ToState) {
 	enum StateType FromState;
 	as->CurrState->exit(as);
@@ -60,7 +76,6 @@ bool SwitchState(struct AppState *as, enum StateType ToState) {
 	for (u8 i = 0; i < as->States->size; i++) {
 		if (as->States->key[i] == ToState) {
 			as->CurrState = as->States->value[i];
-			break;
 		}
 	} 
 
