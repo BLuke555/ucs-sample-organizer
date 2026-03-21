@@ -5,6 +5,8 @@
 #include "core/core.h"
 #include "core/appstate.h"
 
+// #define getch() wgetch(stdscr)
+
 
 bool AppInit(struct AppState **as);
 void GetInput(struct AppState *as);
@@ -27,12 +29,25 @@ int main() {
 }
 
 
-
 bool AppInit(struct AppState **as) {
+
+	initscr();
+	cbreak();
+	curs_set(0);
+	keypad(stdscr, TRUE);
+	noecho();
+
 	return AppStateInit(as);
 }
 
+
 void GetInput(struct AppState *as) {
+	as->Input = wgetch(stdscr);
+
+	if (as->Input != 255) {
+		mvprintw(1, 0,
+				"input: %d\n", as->Input);
+	}
 }
 
 bool AppUpdate(struct AppState *as) {

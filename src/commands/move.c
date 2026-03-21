@@ -4,14 +4,14 @@
 #include "move.h"
 
 
-void move(string8 args[4]) {
-	if (!args[1].str || !args[2].str) {
-		printf("error: the move funciton wants 2 arguments");
+void MoveFile(string8 from, string8 to) {
+	if (!from.str || !to.str) {
+		printf("error: the move funciton wants 2 arguments\n");
 		return;
 	}
 
-	if (rename(args[1].str, args[2].str) == 0) {
-		printf("%s moved to %s\n", args[1].str, args[2].str);
+	if (rename(from.str, to.str) == 0) {
+		printf("%s moved to %s\n", from.str, to.str);
 	} else {
 		perror("error");
 	}

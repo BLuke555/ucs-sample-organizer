@@ -1,8 +1,11 @@
 #pragma once
 
 #include <stdbool.h>
+#include <ncurses.h>
 
+#include "core.h"
 #include "../states/states.h"
+#include "../folderstruct/folderstruct.h"
 
 
 struct AppState {
@@ -14,6 +17,9 @@ struct AppState {
 
 	struct State *CurrState;
 	struct StateDict *States;
+
+	struct FolderStructNode *FolderStruct;
+	struct LinkedListNode *Files;
 };
 
 bool AppStateInit(struct AppState **as);

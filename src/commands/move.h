@@ -2,4 +2,4 @@
 
 #include "../core/core.h"
 
-void move(string8 args[4]);
+void MoveFile(string8 from, string8 to);

@@ -6,7 +6,7 @@ void NormalEnter(struct AppState *as) {
 }
 
 bool NormalUpdate(struct AppState *as) {
-	return false;
+	return SwitchState(as, STATE_COMMAND);
 }
 
 void NormalExit(struct AppState *as) {

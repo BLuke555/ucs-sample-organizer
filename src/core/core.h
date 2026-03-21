@@ -5,5 +5,5 @@
 
 #include "typedefine.h"
 
-
 bool EndsWith();
+int min(int x, int y);
