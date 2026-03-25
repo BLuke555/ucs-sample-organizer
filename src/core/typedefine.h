@@ -26,3 +26,8 @@ typedef struct {
 	char* str;
 } string16;
 
+// bool InitString8(string8 **str, char* StrValue);
+// bool UpdateString8(string8 **str, char* StrValue);
+
+// bool InitString16(string16 **str, char* StrValue);
+// bool UpdateString16(string16 **str, char* StrValue);

@@ -1,7 +1,7 @@
 #pragma once
 
-#include <stdbool.h>
-#include <ncurses.h>
+
+#include <string.h>
 
 #include "core.h"
 #include "../states/states.h"

@@ -1,9 +1,13 @@
+#include <string.h>
+
 #include "core.h"
 
-bool EndsWith() {
-	return false;
+
+
+bool EndsWith(const char* str, const char* suffix) {
+	return strncmp(str + strlen(str) - strlen(suffix), suffix, strlen(suffix)) == 0;
 }
 
-int min(int x, int y) {
-	if (x < y) return x; else return y;
+bool StartsWith(const char* str, const char* prefix) {
+	return strncmp(str, prefix, strlen(prefix)) == 0;
 }
