@@ -4,12 +4,7 @@
 #include <string.h>
 
 #include "core/appstate.h"
-
-
-bool AppInit(struct AppState **as);
-void GetInput(struct AppState *as);
-bool AppUpdate(struct AppState *as);
-void AppDeinit(struct AppState **as);
+#include "main.h"
 
 
 int main(int argc, char **argv) {
